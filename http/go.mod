@@ -1,4 +1,4 @@
-module common-utils-go/http
+module github.com/oliverrsebastian/common-utils-go/http
 
 go 1.20
 

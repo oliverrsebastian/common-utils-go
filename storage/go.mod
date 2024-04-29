@@ -1,4 +1,4 @@
-module common-utils-go/storage
+module github.com/oliverrsebastian/common-utils-go/storage
 
 go 1.20
 

@@ -1,4 +1,4 @@
-module common-utils-go/logger
+module github.com/oliverrsebastian/common-utils-go/logger
 
 go 1.20
 

@@ -1,4 +1,4 @@
-module common-utils-go/database
+module github.com/oliverrsebastian/common-utils-go/database
 
 go 1.20
 

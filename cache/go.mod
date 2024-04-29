@@ -1,4 +1,4 @@
-module common-utils-go/cache
+module github.com/oliverrsebastian/common-utils-go/cache
 
 go 1.20
 
