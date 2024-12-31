@@ -26,12 +26,16 @@ func New(config *Config) *client {
 	}
 }
 
-func (cm *client) Close() error {
-	return cm.redisClient.Close()
+func (c *client) Close() error {
+	return c.redisClient.Close()
 }
 
-func (cm *client) Get(key string, data interface{}) error {
-	res := cm.redisClient.Get(context.Background(), key)
+func (c *client) Keys(ctx context.Context, pattern string) ([]string, error) {
+	return c.redisClient.Keys(ctx, pattern).Result()
+}
+
+func (c *client) Get(ctx context.Context, key string, data interface{}) error {
+	res := c.redisClient.Get(ctx, key)
 	strData, err := res.Result()
 	if err != nil {
 		return err
@@ -43,16 +47,21 @@ func (cm *client) Get(key string, data interface{}) error {
 	return nil
 }
 
-func (cm *client) Put(key string, data interface{}, expTime time.Duration) error {
+func (c *client) Put(ctx context.Context, key string, data interface{}, expTime time.Duration) error {
 	jsonData, err := json.Marshal(data)
 	if err != nil {
 		return err
 	}
-	res := cm.redisClient.Set(context.Background(), key, string(jsonData), expTime)
+	res := c.redisClient.Set(ctx, key, string(jsonData), expTime)
 	return res.Err()
 }
 
-func (cm *client) Remove(key string) error {
-	res := cm.redisClient.Del(context.Background(), key)
+func (c *client) Remove(ctx context.Context, key string) error {
+	res := c.redisClient.Del(ctx, key)
+	return res.Err()
+}
+
+func (c *client) RemoveAll(ctx context.Context, keys []string) error {
+	res := c.redisClient.Del(ctx, keys...)
 	return res.Err()
 }
