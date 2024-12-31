@@ -5,7 +5,7 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"go.uber.org/zap"
+	"github.com/oliverrsebastian/common-utils-go/logger"
 	"google.golang.org/api/option"
 	"io"
 )
@@ -71,7 +71,7 @@ func (s *client) Upload(ctx context.Context, folder, file string, r io.Reader) (
 	}
 
 	if err = w.Close(); err != nil {
-		zap.S().Errorf("got error when closing file %v, err: %v", file, err)
+		logger.Error(ctx, "got error when closing file %v, err: %v", file, err)
 		return
 	}
 
